@@ -1,7 +1,51 @@
+@import "./../../scss/base/mixins";
+
 .header {
   padding: 0 0;
   background-color: var(--text-color);
   color: #fff;
+  @include laptop {
+    padding: 19px 0;
+  }
+}
+
+.burgerBtn {
+  width: 30px;
+  height: 30px;
+  justify-content: space-between;
+  margin-top: 8px;
+  position: relative;
+  z-index: 6;
+
+  span {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 50px;
+    transition: all 0.2s ease-in;
+  }
+  display: none;
+
+  @include laptop {
+    display: grid;
+  }
+}
+
+
+
+
+.burgerBtnActive {
+  span {
+    &:first-child {
+      transform: translateY(10px) rotate(45deg);
+    }
+    &:nth-child(2) {
+      opacity: 0;
+    }
+    &:last-child {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+  }
 }
 
 .wrapper {
@@ -29,6 +73,13 @@
 
   &:hover {
     opacity: 0.8;
+  }
+}
+
+.location,
+.center {
+  @include laptop {
+    display: none;
   }
 }
 
@@ -88,5 +139,10 @@
 
   &:hover {
     opacity: 0.5;
+  }
+  @include middlePhone {
+    &:nth-child(3) {
+      display: none;
+    }
   }
 }

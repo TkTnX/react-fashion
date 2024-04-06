@@ -1,0 +1,24 @@
+@import "./../../scss/base/mixins";
+
+.nav {
+  padding: 20px 0;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.item {
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--light-color);
+
+  @include smallTablet {
+    font-size: 12px;
+  }
+}

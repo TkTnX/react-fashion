@@ -1,0 +1,119 @@
+@import "./../../scss/base/mixins";
+
+.top {
+  position: relative;
+}
+
+.images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  @include bigLaptop {
+    img {
+      &:first-child {
+        display: none;
+      }
+    }
+  }
+  @include bigTablet {
+    img {
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+}
+
+.collection {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.7);
+
+  padding: 88px 91px;
+
+  display: grid;
+  gap: 30px;
+  @include bigLaptop {
+    padding: 44px 46px;
+    width: 60%;
+  }
+  @include tablet {
+    width: 343px;
+    padding: 54px 38.5px;
+  }
+  @include middlePhone {
+    width: unset;
+    width: 300px;
+    padding: 44px 27px;
+  }
+}
+
+.title {
+  font-size: 64px;
+  @include bigLaptop {
+    font-size: 48px;
+  }
+  @include tablet {
+    font-size: 40px;
+  }
+  @include middlePhone {
+    font-size: 32px;
+    text-align: center;
+  }
+}
+
+.desc {
+  font-size: 30px;
+  @include bigLaptop {
+    font-size: 24px;
+  }
+  @include tablet {
+    font-size: 20px;
+  }
+  @include middlePhone {
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
+.link {
+  max-width: 173px;
+  margin: 0 auto;
+  border-radius: 50px;
+  padding: 18px 61px 18px 27px;
+  background-color: #404444;
+  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  position: relative;
+  transition: all 0.1s ease-in;
+
+  &::after {
+    content: "";
+    position: absolute;
+    background-image: url("./images/arrow.svg");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 10px;
+
+    right: 27px;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.1s ease-in;
+  }
+  &:hover {
+    opacity: 0.8;
+    &::after {
+      right: 15px;
+    }
+  }
+}

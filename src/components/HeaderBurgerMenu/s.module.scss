@@ -1,0 +1,36 @@
+.burgerMenu {
+  text-align: center;
+  display: grid;
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  background-color: var(--text-color);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: center;
+}
+
+.nav__list {
+  display: grid;
+  gap: 20px;
+
+  font-size: 24px;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
