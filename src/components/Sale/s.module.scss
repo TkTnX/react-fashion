@@ -1,0 +1,17 @@
+.sale {
+  text-align: center;
+  padding: 18px 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  position: relative;
+  color: var(--light-color);
+}
+
+.close {
+  position: absolute;
+  right: 50px;
+  font-size: 24px;
+  top: 56%;
+  transform: translateY(-50%);
+}
