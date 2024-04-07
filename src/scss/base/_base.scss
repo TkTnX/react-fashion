@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
-
+@import "./mixins";
 :root {
   --text-color: #1d1d1d;
   --light-color: #565656;
@@ -28,4 +28,19 @@ body {
 
 a {
   color: inherit;
+}
+
+.container-right {
+  padding-left: calc(
+    (100% - var(--container-width)) / 2 + var(--container-padding)
+  );
+
+  @include tablet {
+    padding-left: var(--container-padding);
+  }
+}
+
+.title-2 {
+  font-size: 30px;
+  font-weight: 600;
 }

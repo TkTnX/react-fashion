@@ -1,0 +1,37 @@
+.festival {
+  margin-top: 80px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  gap: 30px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.link {
+  display: grid;
+  gap: 20px;
+}
+
+.itemImg {
+  display: block;
+  background-color: #f1f1f1;
+  border-radius: 50%;
+  overflow: visible;
+  padding: 29px;
+  transition: all 0.2s ease-in;
+  justify-self: center;
+  min-width: 100px;
+
+  &:hover {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+}
+
+.itemTitle {
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+}

@@ -1,0 +1,17 @@
+.swiper-pagination-bullet {
+  width: 24px;
+  height: 2px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--light-color);
+}
+
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  position: static;
+  text-align: left;
+  padding-top: 30px;
+}

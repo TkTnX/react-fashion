@@ -1,0 +1,80 @@
+@import "./../../scss/base/mixins";
+
+.categories {
+  margin-top: 94px;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  gap: 50px;
+  position: relative;
+
+  @include bigTablet {
+    flex-direction: column;
+  }
+  @include bigTablet {
+    gap: 20px;
+  }
+}
+
+.leftImg {
+  background-color: #13eded;
+  text-align: center;
+
+  @include bigTablet {
+    margin-right: 15px;
+  }
+}
+
+.swiper {
+  position: absolute;
+  max-width: calc(var(--container-width) - 361px);
+
+  @include bigTablet {
+    position: static;
+  }
+}
+
+.mobileText {
+  display: none;
+  @include bigTablet {
+    display: block;
+    text-align: center;
+  }
+}
+
+.text {
+  @include bigTablet {
+    display: none;
+  }
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.desc {
+  color: var(--light-color);
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 60px;
+}
+
+.slide {
+  max-width: 203px;
+}
+
+.itemTitle {
+  padding-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: 500000000000px !important;
+}

@@ -9,7 +9,7 @@ export const Navigation: React.FC = () => {
       <ul className={s.list}>
         {navList.map((item, index) => (
           <li key={index} className={s.item}>
-            {item}
+            <a href="#!">{item}</a>
           </li>
         ))}
       </ul>
