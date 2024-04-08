@@ -1,0 +1,95 @@
+@import "./../../scss/base/mixins";
+
+.navinfo {
+  background-color: #f6f6f6;
+  padding: 47px 43px 45px;
+
+  font-size: 14px;
+  font-weight: 400;
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  bottom: -440px;
+  transform: translateX(-50%);
+  width: 100%;
+  @include bigTablet {
+    bottom: -1210px;
+  }
+  @include middlePhone {
+    bottom: -1000px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  @include laptop {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+  }
+  @include bigTablet {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  @include middlePhone {
+    flex-direction: column-reverse;
+  }
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 34px;
+}
+
+.list {
+  display: grid;
+  gap: 20px;
+}
+
+.itemTitle {
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.promo {
+  display: grid;
+  gap: 34px;
+
+  @include laptop {
+    display: none;
+  }
+}
+
+.top {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 31px 36px;
+}
+
+.item {
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.topItem {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+
+  img {
+    overflow: visible;
+    background-color: #f1f1f1;
+    border-radius: 100%;
+    display: block;
+    padding: 18px 20px;
+  }
+}

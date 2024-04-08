@@ -1,26 +1,20 @@
-import { Categories } from "./components/Categories/Categories";
-import { Discount } from "./components/Discount/Discount";
-import { Festival } from "./components/Festival/Festival";
+import { Route, Routes } from "react-router-dom";
+import { HomePage } from "./pages/HomePage";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
-import { News } from "./components/News/News";
-import { Popular } from "./components/Popular/Popular";
 import { Sale } from "./components/Sale/Sale";
-import { Top } from "./components/Top/Top";
+import { CatalogPage } from "./pages/CatalogPage";
 
 function App() {
   return (
     <>
       <Sale />
       <Header />
-
       <main>
-        <Top />
-        <Festival />
-        <Categories />
-        <Popular />
-        <Discount />
-        <News />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
+        </Routes>
       </main>
       <Footer />
     </>

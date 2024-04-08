@@ -2,6 +2,8 @@
 
 .nav {
   padding: 20px 0;
+  overflow: visible;
+  position: relative;
 }
 
 .list {
@@ -17,6 +19,11 @@
   font-size: 14px;
   text-transform: uppercase;
   color: var(--light-color);
+  transition: all 0.1s ease-in;
+
+  &:hover {
+    opacity: 0.5;
+  }
 
   @include smallTablet {
     font-size: 12px;

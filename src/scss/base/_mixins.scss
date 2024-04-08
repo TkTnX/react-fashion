@@ -1,6 +1,6 @@
 @mixin bigLaptop {
   @media (max-width: 1290px) {
-      @content;
+    @content;
   }
 }
 
@@ -12,20 +12,20 @@
 
 @mixin bigTablet {
   @media (max-width: 855px) {
-      @content;
+    @content;
   }
 }
 
 @mixin tablet {
   @media (max-width: 768px) {
-      @content;
+    @content;
   }
 }
 
 @mixin smallTablet {
-    @media (max-width: 579px) {
-        @content;
-    }
+  @media (max-width: 579px) {
+    @content;
+  }
 }
 
 @mixin middlePhone {
@@ -34,3 +34,23 @@
   }
 }
 
+@mixin smallPhone {
+  @media (max-width: 320px) {
+      @content;
+  }
+}
+
+// after element
+
+@mixin afterEl {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  @content;
+}

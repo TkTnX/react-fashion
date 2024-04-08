@@ -15,7 +15,7 @@
   justify-content: space-between;
   margin-top: 8px;
   position: relative;
-  z-index: 6;
+  z-index: 35;
 
   span {
     width: 30px;
@@ -30,9 +30,6 @@
     display: grid;
   }
 }
-
-
-
 
 .burgerBtnActive {
   span {

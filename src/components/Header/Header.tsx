@@ -7,9 +7,24 @@ import favImg from "./images/fav.svg";
 import cartImg from "./images/cart.svg";
 import { Navigation } from "../Navigation/Navigation";
 import { HeaderBurgerMenu } from "../HeaderBurgerMenu/HeaderBurgerMenu";
+import { Link } from "react-router-dom";
+import { RegistrationForm } from "../RegistrationForm/RegistrationForm";
+import { LoginForm } from "../LoginForm/LoginForm";
+import { ChangePasswordForm } from "../ChangePasswordForm/ChangePasswordForm";
 export const Header: React.FC = () => {
   const [openBurger, setOpenBurger] = useState<boolean>(false);
+  const [openRegisterForm, setOpenRegisterForm] = useState(false);
+  const [openLoginForm, setOpenLoginForm] = useState(false);
+  const [openChangePasswordForm, setOpenChangePasswordForm] = useState(false);
   const handleBurger = () => setOpenBurger(!openBurger);
+
+  const handleRegisterForm = () => setOpenRegisterForm(!openRegisterForm);
+
+  {
+    openRegisterForm
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "visible");
+  }
 
   return (
     <>
@@ -28,7 +43,9 @@ export const Header: React.FC = () => {
               <span></span>
             </button>
             <div className={s.left}>
-              <h4 className={s.logo}>Logo</h4>
+              <Link to="/">
+                <h4 className={s.logo}>Logo</h4>
+              </Link>
               <button className={s.location}>
                 <img src={locationImg} alt="Location" />
                 <p className={s.city}>МОСКВА</p>
@@ -62,7 +79,7 @@ export const Header: React.FC = () => {
                   </button>
                 </li>
                 <li className={s.user__item}>
-                  <button>
+                  <button onClick={handleRegisterForm}>
                     <img src={userImg} alt="Профиль" />
                   </button>
                 </li>
@@ -82,6 +99,16 @@ export const Header: React.FC = () => {
         </div>
       </header>
 
+      {openRegisterForm && (
+        <RegistrationForm setOpenRegisterForm={setOpenRegisterForm} />
+      )}
+
+      {openLoginForm && <LoginForm setOpenLoginForm={setOpenLoginForm} />}
+      {openChangePasswordForm && (
+        <ChangePasswordForm
+          setOpenChangePasswordForm={setOpenChangePasswordForm}
+        />
+      )}
       <Navigation />
     </>
   );

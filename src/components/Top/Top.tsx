@@ -4,6 +4,7 @@ import s from "./s.module.scss";
 import img01 from "./images/01.jpg";
 import img02 from "./images/02.jpg";
 import img03 from "./images/03.jpg";
+import { Link } from "react-router-dom";
 
 export const Top: React.FC = () => {
   return (
@@ -17,9 +18,9 @@ export const Top: React.FC = () => {
         <div className={s.collection}>
           <h1 className={s.title}>Spring mood</h1>
           <p className={s.desc}>-20% на новую коллекцию.</p>
-          <a href="#!" className={s.link}>
+          <Link className={s.link} to="/catalog">
             В каталог
-          </a>
+          </Link>
         </div>
       </div>
     </section>
