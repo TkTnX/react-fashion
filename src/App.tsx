@@ -12,11 +12,7 @@ function App() {
       <Header />
       <main>
         <Routes>
-          {/* 
-      //TODO: Сделать валидацию формы
-      // TODO: При отправлении формы закрывать её.
-      // TODO: Если смогу, сделать отдельную страницу для товара
-    */}
+
 
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
