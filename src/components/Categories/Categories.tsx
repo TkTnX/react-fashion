@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import s from "./s.module.scss";
 import axios from "axios";
 import "./_style.scss";
+import { useFetchData } from "../../hooks/useFetchData";
 
 type CategoryType = {
   title: string;
@@ -14,12 +15,16 @@ type CategoryType = {
 };
 
 export const Categories: React.FC = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://35264782283560cf.mokky.dev/categories")
-      .then((res) => setData(res.data));
-  }, []);
+  const url = "https://35264782283560cf.mokky.dev/categories";
+  const { data, isLoading, error } = useFetchData(url);
+
+  if (isLoading) {
+    return <p>Загрузка....</p>;
+  }
+
+  if (error) {
+    return <p>Error!</p>;
+  }
 
   return (
     <section className={s.categories}>

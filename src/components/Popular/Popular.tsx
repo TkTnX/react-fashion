@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
-import axios from "axios";
 import s from "./s.module.scss";
 import { CatalogCard } from "../CatalogCard/CatalogCard";
+import { useFetchData } from "../../hooks/useFetchData";
 export type CatalogCardType = {
   id: number;
   price: number;
@@ -11,15 +11,21 @@ export type CatalogCardType = {
   brand: string;
   desc: string;
   sizes?: string[];
+  isLoading?: boolean;
 };
 
 export const Popular: React.FC = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://35264782283560cf.mokky.dev/catalog")
-      .then((res) => setData(res.data));
-  }, []);
+  const url = "https://35264782283560cf.mokky.dev/catalog";
+
+  const { data, isLoading, error } = useFetchData(url);
+
+  if (isLoading) {
+    return <p>Загрузка...</p>;
+  }
+
+  if (error) {
+    return <p>Ошибка!</p>;
+  }
 
   return (
     <section className={s.popular}>

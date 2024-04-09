@@ -54,9 +54,7 @@ export const Footer: React.FC = () => {
               </li>
             </ul>
             <ul className={s.footer__list}>
-              <li className={`${s.footer__item} ${s.title}`}>
-                <a href="#!">Компания</a>
-              </li>
+              <li className={`${s.footer__item} ${s.title}`}>Компания</li>
               <li className={s.footer__item}>
                 <a href="#!">О нас</a>
               </li>

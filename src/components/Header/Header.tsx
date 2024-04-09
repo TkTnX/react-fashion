@@ -9,19 +9,26 @@ import { Navigation } from "../Navigation/Navigation";
 import { HeaderBurgerMenu } from "../HeaderBurgerMenu/HeaderBurgerMenu";
 import { Link } from "react-router-dom";
 import { RegistrationForm } from "../RegistrationForm/RegistrationForm";
-import { LoginForm } from "../LoginForm/LoginForm";
 import { ChangePasswordForm } from "../ChangePasswordForm/ChangePasswordForm";
+import { useAuth } from "../../hooks/useAuth";
+import { LoginnedAccount } from "../LoginnedAccount/LoginnedAccount";
 export const Header: React.FC = () => {
   const [openBurger, setOpenBurger] = useState<boolean>(false);
   const [openRegisterForm, setOpenRegisterForm] = useState(false);
-  const [openLoginForm, setOpenLoginForm] = useState(false);
+  const [loginnedAccount, setLoginnedAccount] = useState(false);
   const [openChangePasswordForm, setOpenChangePasswordForm] = useState(false);
   const handleBurger = () => setOpenBurger(!openBurger);
 
-  const handleRegisterForm = () => setOpenRegisterForm(!openRegisterForm);
-
+  const { isAuth } = useAuth();
+  const handleRegisterForm = () => {
+    if (!isAuth) {
+      setOpenRegisterForm(!openRegisterForm);
+    } else {
+      setLoginnedAccount(!loginnedAccount);
+    }
+  };
   {
-    openRegisterForm
+    openRegisterForm || loginnedAccount || openChangePasswordForm
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "visible");
   }
@@ -103,12 +110,15 @@ export const Header: React.FC = () => {
         <RegistrationForm setOpenRegisterForm={setOpenRegisterForm} />
       )}
 
-      {openLoginForm && <LoginForm setOpenLoginForm={setOpenLoginForm} />}
       {openChangePasswordForm && (
         <ChangePasswordForm
           setOpenChangePasswordForm={setOpenChangePasswordForm}
         />
       )}
+      {loginnedAccount && (
+        <LoginnedAccount setLogginedAccount={setLoginnedAccount} />
+      )}
+
       <Navigation />
     </>
   );

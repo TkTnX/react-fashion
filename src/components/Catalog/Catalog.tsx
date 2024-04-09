@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import s from "./s.module.scss";
 import { CatalogList } from "../CatalogList/CatalogList";
 
 export const Catalog: React.FC = () => {
-  const [data, setData] = useState([]);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
   const handleOpenFilter = () => {
@@ -17,19 +15,13 @@ export const Catalog: React.FC = () => {
     setIsOpenFilter(false);
   };
 
-  useEffect(() => {
-    axios.get(`https://35264782283560cf.mokky.dev/catalogItems`).then((res) => {
-      setData(res.data);
-    });
-  }, []);
-
   return (
     <section className={s.catalog}>
       <div className="container">
         <div className={s.top}>
           <h2 className={`title-2 ${s.title}`}>
             Каталог товаров
-            <span>{data.length} товара</span>
+            <span>20 шт. товара</span>
           </h2>
 
           <div className={s.filters}>
@@ -78,9 +70,7 @@ export const Catalog: React.FC = () => {
           </div>
         </div>
         <ul className={s.catalogList}>
-          {data.map((item: any, index) => (
-            <CatalogList key={index} {...item} />
-          ))}
+          <CatalogList />
         </ul>
       </div>
     </section>
