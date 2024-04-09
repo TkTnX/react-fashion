@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import s from "./s.module.scss";
-import axios from "axios";
 import "./_style.scss";
 import { useFetchData } from "../../hooks/useFetchData";
 
