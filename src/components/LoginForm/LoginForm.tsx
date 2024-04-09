@@ -14,7 +14,8 @@ export const LoginForm: React.FC<LoginType> = ({ setOpenLoginForm }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  const handleLogin = (email: string, password: string) => {
+  const handleLogin = (email: string, password: string, event: any) => {
+    event.preventDefault()
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
@@ -68,7 +69,7 @@ export const LoginForm: React.FC<LoginType> = ({ setOpenLoginForm }) => {
             />
           </label>
           <button
-            onClick={() => handleLogin(email, pass)}
+            onClick={(event) => handleLogin(email, pass, event)}
             className={`${s.btn} form-btn`}
           >
             Войти

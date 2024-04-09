@@ -18,7 +18,8 @@ export const RegistrationForm: React.FC<RegistrationProps> = ({
   const dispatch = useDispatch();
   const [openLoginForm, setOpenLoginForm] = useState(false);
 
-  const handleRegister = (email: string, password: string) => {
+  const handleRegister = (email: string, password: string, event: any) => {
+    event.preventDefault();
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
@@ -73,12 +74,14 @@ export const RegistrationForm: React.FC<RegistrationProps> = ({
             />
           </label>
           <button
-            onClick={() => handleRegister(email, pass)}
+            onClick={(event) => handleRegister(email, pass, event)}
             className={`${s.btn} form-btn`}
           >
             Зарегистрироваться
           </button>
-          <button type="button" onClick={handleOpenLogin}>Уже есть аккаунт?</button>
+          <button type="button" onClick={handleOpenLogin}>
+            Уже есть аккаунт?
+          </button>
         </form>
         {openLoginForm && <LoginForm setOpenLoginForm={setOpenLoginForm} />}
       </div>
