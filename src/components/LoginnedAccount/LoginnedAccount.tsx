@@ -1,31 +1,30 @@
 import React from "react";
-import { MdOutlineClear } from "react-icons/md";
-import { CiLogout } from "react-icons/ci";
-import { useAuth } from "../../hooks/useAuth";
 import s from "./s.module.scss";
+
+import { useAuth } from "../../hooks/useAuth";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../../redux/Slices/authSlice";
 
-type LoginnedAccountType = {
-  setLogginedAccount: (boolean: boolean) => void;
-};
+import { MdOutlineClear } from "react-icons/md";
+import { CiLogout } from "react-icons/ci";
+import { openAccount } from "../../redux/Slices/formsSlice";
 
-export const LoginnedAccount: React.FC<LoginnedAccountType> = ({
-  setLogginedAccount,
-}) => {
+export const LoginnedAccount: React.FC = () => {
   const { email } = useAuth();
   const dispatch = useDispatch();
 
   const handleRemoveUser = () => {
     dispatch(removeUser());
-    setLogginedAccount(false);
+    dispatch(openAccount(false));
   };
+
+  
 
   return (
     <div className="backdrop">
       <form className={`${s.form} form`}>
         <button
-          onClick={() => setLogginedAccount(false)}
+          onClick={() => dispatch(openAccount(false))}
           type="button"
           className="closeBtn"
         >
@@ -38,7 +37,7 @@ export const LoginnedAccount: React.FC<LoginnedAccountType> = ({
           {email}
         </label>
 
-        <button onClick={handleRemoveUser} className={`${s.btn} `}>
+        <button onClick={handleRemoveUser} className={s.btn}>
           <p>Выйти из аккаунта</p>
           <CiLogout />
         </button>

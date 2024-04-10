@@ -1,29 +1,24 @@
 import React, { useState } from "react";
-import s from "./s.module.scss";
-import { MdOutlineClear } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../../redux/Slices/authSlice";
-import { LoginForm } from "../LoginForm/LoginForm";
+import { AuthForm } from "../AuthForm/AuthForm";
+import { openLoginForm, openRegisterForm } from "../../redux/Slices/formsSlice";
 
-type RegistrationProps = {
-  setOpenRegisterForm: (state: boolean) => void;
-};
-
-export const RegistrationForm: React.FC<RegistrationProps> = ({
-  setOpenRegisterForm,
-}) => {
+export const RegistrationForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+
   const dispatch = useDispatch();
-  const [openLoginForm, setOpenLoginForm] = useState(false);
 
   const handleRegister = (email: string, password: string, event: any) => {
     event.preventDefault();
+
+    dispatch(openRegisterForm(false));
+    dispatch(openLoginForm(false));
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(user);
         dispatch(
           setUser({
             email: user.email,
@@ -32,59 +27,24 @@ export const RegistrationForm: React.FC<RegistrationProps> = ({
             token: user.accessToken,
           })
         );
+        alert("Успешная регистрация! Добро пожаловать!");
       })
-      .catch(console.error);
+      .catch((err) => {
+        alert(`Ошибка!!! ${err.message}`);
+      });
   };
-
-  const handleOpenLogin = () => setOpenLoginForm(!openLoginForm);
 
   return (
     <>
-      <div className="backdrop">
-        <form className={`${s.form} form`}>
-          <button
-            onClick={() => setOpenRegisterForm(false)}
-            type="button"
-            className="closeBtn"
-          >
-            <MdOutlineClear />
-          </button>
-          <h2 className={`title-2 ${s.title}`}>Регистрация</h2>
-          <label>
-            Введите ваш e-mail
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              type="email"
-              required
-            />
-          </label>
-          <label>
-            Введите ваш номер телефона
-            <input type="tel" required />
-          </label>
-          <label>
-            Введите ваш пароль
-            <input
-              onChange={(e) => setPass(e.target.value)}
-              value={pass}
-              autoComplete="off"
-              type="password"
-              required
-            />
-          </label>
-          <button
-            onClick={(event) => handleRegister(email, pass, event)}
-            className={`${s.btn} form-btn`}
-          >
-            Зарегистрироваться
-          </button>
-          <button type="button" onClick={handleOpenLogin}>
-            Уже есть аккаунт?
-          </button>
-        </form>
-        {openLoginForm && <LoginForm setOpenLoginForm={setOpenLoginForm} />}
-      </div>
+      <AuthForm
+        title="Регистрация"
+        email={email}
+        pass={pass}
+        setEmail={setEmail}
+        setPass={setPass}
+        handleAuth={handleRegister}
+        textBtn="Зарегистрироваться"
+      />
     </>
   );
 };

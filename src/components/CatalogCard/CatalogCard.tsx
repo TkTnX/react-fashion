@@ -33,9 +33,9 @@ export const CatalogCard: React.FC<CatalogCardType> = ({
         <div className={s.cardInfo}>
           <p className={s.brand}>{brand}</p>
           <p className={s.desc}>{desc}</p>
-          {sizes !== undefined ? (
+          {sizes !== undefined && (
             <p className={s.sizes}>{sizes.map((size) => `${size} `)}</p>
-          ) : null}
+          )}
         </div>
       </div>
     </div>

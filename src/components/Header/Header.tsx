@@ -1,34 +1,45 @@
 import React, { useState } from "react";
 import s from "./s.module.scss";
+
+import { Navigation } from "../Navigation/Navigation";
+import { HeaderBurgerMenu } from "../HeaderBurgerMenu/HeaderBurgerMenu";
+import { Link } from "react-router-dom";
+import { RegistrationForm } from "../RegistrationForm/RegistrationForm";
+import { useAuth } from "../../hooks/useAuth";
+import { LoginnedAccount } from "../LoginnedAccount/LoginnedAccount";
+import { LoginForm } from "../LoginForm/LoginForm";
+
 import locationImg from "./images/location.svg";
 import searchImg from "./images/search.svg";
 import userImg from "./images/user.svg";
 import favImg from "./images/fav.svg";
 import cartImg from "./images/cart.svg";
-import { Navigation } from "../Navigation/Navigation";
-import { HeaderBurgerMenu } from "../HeaderBurgerMenu/HeaderBurgerMenu";
-import { Link } from "react-router-dom";
-import { RegistrationForm } from "../RegistrationForm/RegistrationForm";
-import { ChangePasswordForm } from "../ChangePasswordForm/ChangePasswordForm";
-import { useAuth } from "../../hooks/useAuth";
-import { LoginnedAccount } from "../LoginnedAccount/LoginnedAccount";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  openRegisterForm,
+  registerFormSelector,
+  openAccount,
+  openAccountSelector,
+  loginFormSelector,
+} from "../../redux/Slices/formsSlice";
+
 export const Header: React.FC = () => {
   const [openBurger, setOpenBurger] = useState<boolean>(false);
-  const [openRegisterForm, setOpenRegisterForm] = useState(false);
-  const [loginnedAccount, setLoginnedAccount] = useState(false);
-  const [openChangePasswordForm, setOpenChangePasswordForm] = useState(false);
-  const handleBurger = () => setOpenBurger(!openBurger);
+  const dispatch = useDispatch();
+  const isOpenRegisterForm = useSelector(registerFormSelector);
+  const isOpenAccount = useSelector(openAccountSelector);
+  const isOpenLoginForm = useSelector(loginFormSelector);
 
   const { isAuth } = useAuth();
   const handleRegisterForm = () => {
     if (!isAuth) {
-      setOpenRegisterForm(!openRegisterForm);
+      dispatch(openRegisterForm(!isOpenRegisterForm));
     } else {
-      setLoginnedAccount(!loginnedAccount);
+      dispatch(openAccount(!isOpenAccount));
     }
   };
   {
-    openRegisterForm || loginnedAccount || openChangePasswordForm
+    isOpenRegisterForm || isOpenAccount || isOpenLoginForm
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "visible");
   }
@@ -43,7 +54,7 @@ export const Header: React.FC = () => {
               className={`${s.burgerBtn} ${
                 openBurger ? s.burgerBtnActive : ""
               }`}
-              onClick={handleBurger}
+              onClick={() => setOpenBurger(!openBurger)}
             >
               <span></span>
               <span></span>
@@ -106,18 +117,11 @@ export const Header: React.FC = () => {
         </div>
       </header>
 
-      {openRegisterForm && (
-        <RegistrationForm setOpenRegisterForm={setOpenRegisterForm} />
-      )}
+      {isOpenRegisterForm && <RegistrationForm />}
 
-      {openChangePasswordForm && (
-        <ChangePasswordForm
-          setOpenChangePasswordForm={setOpenChangePasswordForm}
-        />
-      )}
-      {loginnedAccount && (
-        <LoginnedAccount setLogginedAccount={setLoginnedAccount} />
-      )}
+      {isOpenAccount && <LoginnedAccount />}
+
+      {isOpenLoginForm && <LoginForm />}
 
       <Navigation />
     </>

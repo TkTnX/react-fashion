@@ -12,10 +12,6 @@ function App() {
       <Header />
       <main>
         <Routes>
-
-
-          
-          
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
         </Routes>

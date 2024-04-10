@@ -6,15 +6,15 @@ import s from "./s.module.scss";
 import { CatalogCardType } from "../Popular/Popular";
 export const CatalogList: React.FC = () => {
   const url = "https://35264782283560cf.mokky.dev/catalogItems";
-
   const { data, isLoading, error } = useFetchData(url);
-
   if (isLoading) {
     <CatalogSkeleton />;
   }
   if (error) {
     <h1>ОШИБКА!</h1>;
   }
+
+
 
   return (
     <div className={s.catalogList}>

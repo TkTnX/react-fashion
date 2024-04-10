@@ -4,7 +4,7 @@ import locationImg from "./../Header/images/location.svg";
 
 export const HeaderBurgerMenu: React.FC = () => {
   return (
-    <div className={`${s.burgerMenu} fade-in`}>
+    <div className={s.burgerMenu}>
       <button className={s.location}>
         <img src={locationImg} alt="Location" />
         <p className={s.city}>МОСКВА</p>

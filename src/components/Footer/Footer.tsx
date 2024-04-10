@@ -5,6 +5,25 @@ import mastercardImg from "./mastercard.svg";
 import visaImg from "./visa.svg";
 import mirImg from "./mir.svg";
 
+const helpList = [
+  "Мой аккаунт",
+  "Где мой магазин",
+  "Доставка и Оплата",
+  "правила возврата",
+  "найти магазин",
+  "подобрать размер",
+];
+
+const catalogList = [
+  "новинки",
+  "одежда",
+  "Обувь",
+  "аксессуары",
+  "Любимые бренды",
+];
+
+const companyList = ["О нас", "Философия бренда", "Блог", "контакты", "Faq"];
+
 export const Footer: React.FC = () => {
   return (
     <footer className={s.footer}>
@@ -13,63 +32,30 @@ export const Footer: React.FC = () => {
           <nav className={s.nav}>
             <ul className={s.footer__list}>
               <li className={`${s.footer__item} ${s.title}`}>Помощь</li>
-              <li className={s.footer__item}>
-                <a href="#!">Мой аккаунт</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">Где мой магазин</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">Доставка и Оплата</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">правила возврата</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">найти магазин</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">подобрать размер</a>
-              </li>
+              {helpList.map((item, index) => (
+                <li key={index} className={s.footer__item}>
+                  <a href="#!">{item}</a>
+                </li>
+              ))}
             </ul>
             <ul className={s.footer__list}>
               <li className={`${s.footer__item} ${s.title}`}>Каталог</li>
-              <li className={s.footer__item}>
-                <a href="#!">новинки</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">одежда</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">Обувь</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">аксессуары</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">Любимые бренды</a>
-              </li>
+              {catalogList.map((item, index) => (
+                <li key={index} className={s.footer__item}>
+                  <a href="#!">{item}</a>
+                </li>
+              ))}
               <li className={`${s.footer__item} ${s.sale}`}>
                 <a href="#!">SALE%</a>
               </li>
             </ul>
             <ul className={s.footer__list}>
               <li className={`${s.footer__item} ${s.title}`}>Компания</li>
-              <li className={s.footer__item}>
-                <a href="#!">О нас</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">Философия бренда</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">Блог</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">контакты</a>
-              </li>
-              <li className={s.footer__item}>
-                <a href="#!">Faq</a>
-              </li>
+              {companyList.map((item, index) => (
+                <li key={index} className={s.footer__item}>
+                  <a href="#!">{item}</a>
+                </li>
+              ))}
             </ul>
           </nav>
           <div className={s.payment}>

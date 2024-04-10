@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import s from "./s.module.scss";
+
 import { CatalogList } from "../CatalogList/CatalogList";
+
+const filterList = [
+  "Только с размерами",
+  "Только без размеров",
+  "Stone Island",
+];
+
+const sortList = ["По цене", "По бренду", "По описанию"];
 
 export const Catalog: React.FC = () => {
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
+
   const handleOpenFilter = () => {
     setIsOpenFilter(!isOpenFilter);
     setIsOpenSort(false);
@@ -33,15 +43,11 @@ export const Catalog: React.FC = () => {
               {isOpenFilter && (
                 <div className={s.popup}>
                   <ul>
-                    <li>
-                      <button>Только с размерами</button>
-                    </li>
-                    <li>
-                      <button>Только без размеров</button>
-                    </li>
-                    <li>
-                      <button>Stone Island</button>
-                    </li>
+                    {filterList.map((item, i) => (
+                      <li key={i}>
+                        <button>{item}</button>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )}
@@ -54,15 +60,11 @@ export const Catalog: React.FC = () => {
               {isOpenSort && (
                 <div className={s.popup}>
                   <ul>
-                    <li>
-                      <button>По цене</button>
-                    </li>
-                    <li>
-                      <button>По бренду</button>
-                    </li>
-                    <li>
-                      <button>По описанию</button>
-                    </li>
+                    {sortList.map((item) => (
+                      <li key={item}>
+                        <button>{item}</button>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )}
