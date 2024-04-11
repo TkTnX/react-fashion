@@ -4,6 +4,7 @@ import { CatalogCardType } from "../Popular/Popular";
 
 import cartImg from "./cart.svg";
 import heartImg from "./heart.svg";
+import { Link } from "react-router-dom";
 
 export const CatalogCard: React.FC<CatalogCardType> = ({
   price,
@@ -11,18 +12,21 @@ export const CatalogCard: React.FC<CatalogCardType> = ({
   brand,
   desc,
   sizes,
+  id
 }) => {
   return (
     <div className={s.card}>
-      <div className={s.cardImg}>
-        <button className={s.fav}>
-          <img src={heartImg} alt="Add to fav" />
-        </button>
-        <img src={img} alt={desc} />
-        <div className={s.new}>
-          <p>New</p>
+      <Link to={`/catalog/${id}`}>
+        <div className={s.cardImg}>
+          <button className={s.fav}>
+            <img src={heartImg} alt="Add to fav" />
+          </button>
+          <img src={img} alt={desc} />
+          <div className={s.new}>
+            <p>New</p>
+          </div>
         </div>
-      </div>
+      </Link>
       <div className={s.cardBottom}>
         <div className={s.cardPrice}>
           <b>{price} ₽</b>
