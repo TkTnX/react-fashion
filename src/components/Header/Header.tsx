@@ -106,11 +106,13 @@ export const Header: React.FC = () => {
                     <img src={favImg} alt="Любимое" />
                   </button>
                 </li>
-                <li className={s.user__item}>
-                  <button>
-                    <img src={cartImg} alt="Корзина" />
-                  </button>
-                </li>
+                <Link to="/cart">
+                  <li className={s.user__item}>
+                    <button>
+                      <img src={cartImg} alt="Корзина" />
+                    </button>
+                  </li>
+                </Link>
               </ul>
             </div>
           </div>

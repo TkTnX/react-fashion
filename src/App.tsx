@@ -5,6 +5,7 @@ import { Header } from "./components/Header/Header";
 import { Sale } from "./components/Sale/Sale";
 import { CatalogPage } from "./pages/CatalogPage";
 import { FullProductPage } from "./pages/FullProductPage";
+import { CartPage } from "./pages/CartPage";
 
 function App() {
   return (
@@ -12,10 +13,16 @@ function App() {
       <Sale />
       <Header />
       <main>
+        {
+          // TODO: Корзина :)
+          // ! Я из прошлого верю, что у тебя всё получится!
+        }
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path={"/catalog/:id"} element={<FullProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </main>
       <Footer />

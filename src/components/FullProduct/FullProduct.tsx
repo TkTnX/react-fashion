@@ -6,7 +6,6 @@ import { useFetchData } from "../../hooks/useFetchData";
 import leftImg from "./img/leftArrow.svg";
 import rightImg from "./img/rightArrow.svg";
 import { FullProductAccordeon } from "../FullProductAccordeon/FullProductAccordeon";
-import { Popular } from "../Popular/Popular";
 type ProductType = {
   img: string;
   desc: string;
@@ -78,7 +77,6 @@ export const FullProduct: React.FC = () => {
           <FullProductAccordeon />
         </div>
       </div>
-      <Popular />
     </div>
   );
 };
