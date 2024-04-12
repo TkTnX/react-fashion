@@ -1,7 +1,12 @@
+@import "./../../scss/base/mixins";
+
 .wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 39px;
-}
 
+  @include laptop {
+    flex-direction: column;
+  }
+}

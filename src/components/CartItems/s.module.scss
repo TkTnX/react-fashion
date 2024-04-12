@@ -1,3 +1,16 @@
+@import "./../../scss/base/mixins";
+.table {
+  @include smallTablet {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    align-items: center;
+  }
+  @include middlePhone {
+    gap: 30px;
+  }
+}
+
 .thead {
   position: relative;
   &::after {
@@ -7,6 +20,9 @@
     width: 100%;
     background-color: #dededb;
     top: 45px;
+    @include smallTablet {
+      display: none;
+    }
   }
 }
 
@@ -20,6 +36,17 @@
     font-size: 14px;
     text-transform: uppercase;
     padding-bottom: 30px;
+    @include smallTablet {
+      display: flex;
+      justify-content: space-between;
+      gap: 80px;
+    }
+  }
+  @include tablet {
+    gap: 20px;
+  }
+  @include smallTablet {
+    flex-direction: column;
   }
 }
 
@@ -27,6 +54,9 @@
   margin-top: 30px;
   display: grid;
   gap: 60px;
+  @include tablet {
+    gap: 20px;
+  }
 }
 
 .tbodyItem {
@@ -44,15 +74,33 @@
     width: 100%;
     background-color: #dededb;
     bottom: -30px;
+    @include smallTablet {
+      display: none;
+    }
+  }
+  @include tablet {
+    gap: 0;
+  }
+  @include smallTablet {
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 20px 30px;
+    gap: 20px;
   }
 }
 
 .tableColor {
   margin-left: -45px;
+  @include tablet {
+    margin-left: 0;
+  }
 }
 
 .tableSize {
   margin-left: -10px;
+  @include tablet {
+    margin-left: 0;
+  }
 }
 
 .tableColor,
