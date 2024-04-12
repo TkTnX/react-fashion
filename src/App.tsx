@@ -13,10 +13,7 @@ function App() {
       <Sale />
       <Header />
       <main>
-        {
-          // TODO: Корзина :)
-          // ! Я из прошлого верю, что у тебя всё получится!
-        }
+
 
         <Routes>
           <Route path="/" element={<HomePage />} />
