@@ -59,6 +59,22 @@
   }
 }
 
+.deleteProduct {
+  position: absolute;
+  bottom: 0;
+  left: 100px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.7;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  cursor: pointer;
+  @include smallTablet {
+    top: 0;
+    left: 10px;
+  }
+}
+
 .tbodyItem {
   font-size: 14px;
   color: var(--light-color);

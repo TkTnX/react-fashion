@@ -3,8 +3,9 @@ import s from "./s.module.scss";
 
 import leftArrow from "./img/leftArrow.svg";
 import rightArrow from "./img/rightArrow.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { addToCart, deleteItem, minusItem } from "../../redux/Slices/cartSlice";
 
 export const CartItems: React.FC = () => {
   const cartItemsSelector = useSelector(
@@ -13,6 +14,20 @@ export const CartItems: React.FC = () => {
   const totalPriceSelector = useSelector(
     (state: RootState) => state.cart.totalPrice
   );
+
+  const totalCount = cartItemsSelector.reduce(
+    (sum, item) => sum + item.count,
+    0
+  );
+
+  const dispatch = useDispatch();
+
+  const handleDeleteItem = (id: number) => {
+    const isConfirm = confirm("Вы уверены, что хотите удалить товар?");
+    if (isConfirm) {
+      dispatch(deleteItem(id));
+    }
+  };
 
   const totalPriceWithSale = totalPriceSelector * 0.02;
   return (
@@ -35,14 +50,17 @@ export const CartItems: React.FC = () => {
                 <img className={s.tableImg} src={item.img} alt="img" />
               </th>
               <td className={s.tableColor}>Белый</td>
+              <td onClick={() => handleDeleteItem(item.id)} className={s.deleteProduct}>
+                Удалить товар
+              </td>
               <td className={s.tableSize}>44</td>
               <td className={s.tablePrice}>{item.price}</td>
               <td className={s.tableCounter}>
-                <button>
+                <button onClick={() => dispatch(minusItem(item.id))}>
                   <img src={leftArrow} alt="Убрать 1 товар" />
                 </button>
                 <p>{item.count}</p>
-                <button>
+                <button onClick={() => dispatch(addToCart(item))}>
                   <img src={rightArrow} alt="Добавить 1 товар" />
                 </button>
               </td>
@@ -56,7 +74,7 @@ export const CartItems: React.FC = () => {
         <li>
           <p>Количество</p>
           <div className={s.line}></div>
-          <span>{cartItemsSelector.length}</span>
+          <span>{totalCount}</span>
         </li>
         <li>
           <p>Стоимость</p>
@@ -66,7 +84,7 @@ export const CartItems: React.FC = () => {
         <li>
           <p>Скидка</p>
           <div className={s.line}></div>
-          <span className={s.sale}>{totalPriceWithSale} ₽</span>
+          <span className={s.sale}>{totalPriceWithSale.toFixed(1)} ₽</span>
         </li>
         <li>
           <p>Доставка</p>
@@ -77,7 +95,7 @@ export const CartItems: React.FC = () => {
           <b>ИТОГО</b>
           <div className={s.line}></div>
           <b className={s.totalPrice}>
-            {totalPriceSelector - totalPriceWithSale} ₽
+            {totalPriceSelector - totalPriceWithSale + 500} ₽
           </b>
         </li>
       </ul>

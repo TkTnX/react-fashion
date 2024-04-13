@@ -21,7 +21,7 @@ export const CatalogCard: React.FC<CatalogCardType> = ({
   const { isAuth } = useAuth();
   const handleAddToCart = () => {
     if (isAuth) {
-      dispatch(addToCart(product));
+    dispatch(addToCart(product));
     } else {
       alert("Сначала, ввойдите в аккаунт!");
     }
