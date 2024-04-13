@@ -6,6 +6,9 @@ import { useFetchData } from "../../hooks/useFetchData";
 import leftImg from "./img/leftArrow.svg";
 import rightImg from "./img/rightArrow.svg";
 import { FullProductAccordeon } from "../FullProductAccordeon/FullProductAccordeon";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/Slices/cartSlice";
+import { useAuth } from "../../hooks/useAuth";
 type ProductType = {
   img: string;
   desc: string;
@@ -18,11 +21,21 @@ export const FullProduct: React.FC = () => {
   const url = `https://35264782283560cf.mokky.dev/catalogItems/${id}`;
 
   const { data, isLoading, error } = useFetchData(url);
+  const { isAuth } = useAuth();
   const productData = data as unknown as ProductType;
   const { img, desc, price, sizes } = productData;
+  const dispatch = useDispatch();
   if (isLoading) {
     return <p>Загрузка...</p>;
   }
+
+  const handleAddToCart = () => {
+    if (isAuth) {
+      dispatch(addToCart(data));
+    } else {
+      alert("Сначала, ввойдите в аккаунт!");
+    }
+  };
 
   if (error) {
     return <p>Ошибка!</p>;
@@ -63,7 +76,9 @@ export const FullProduct: React.FC = () => {
             </select>
           )}
           <div className={s.addToCart}>
-            <button className={s.addToCartBtn}>В КОРЗИНУ</button>
+            <button onClick={handleAddToCart} className={s.addToCartBtn}>
+              В КОРЗИНУ
+            </button>
             <div className={s.counter}>
               <button>
                 <img src={leftImg} alt="Убрать элемент" />

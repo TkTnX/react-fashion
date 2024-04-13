@@ -5,15 +5,28 @@ import { CatalogCardType } from "../Popular/Popular";
 import cartImg from "./cart.svg";
 import heartImg from "./heart.svg";
 import { Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/Slices/cartSlice";
+import { useAuth } from "../../hooks/useAuth";
 export const CatalogCard: React.FC<CatalogCardType> = ({
   price,
   img,
   brand,
   desc,
   sizes,
-  id
+  id,
 }) => {
+  const product = { price, img, brand, desc, sizes, id };
+  const dispatch = useDispatch();
+  const { isAuth } = useAuth();
+  const handleAddToCart = () => {
+    if (isAuth) {
+      dispatch(addToCart(product));
+    } else {
+      alert("Сначала, ввойдите в аккаунт!");
+    }
+  };
+
   return (
     <div className={s.card}>
       <Link to={`/catalog/${id}`}>
@@ -30,7 +43,7 @@ export const CatalogCard: React.FC<CatalogCardType> = ({
       <div className={s.cardBottom}>
         <div className={s.cardPrice}>
           <b>{price} ₽</b>
-          <button>
+          <button onClick={handleAddToCart}>
             <img src={cartImg} alt="в корзину" />
           </button>
         </div>

@@ -6,14 +6,18 @@ import { Sale } from "./components/Sale/Sale";
 import { CatalogPage } from "./pages/CatalogPage";
 import { FullProductPage } from "./pages/FullProductPage";
 import { CartPage } from "./pages/CartPage";
+import { ScrollToTop } from "./helpers/ScrollToTop";
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Sale />
       <Header />
       <main>
-
+        {
+          // TODO: Сделать функционал для корзины!
+        }
 
         <Routes>
           <Route path="/" element={<HomePage />} />

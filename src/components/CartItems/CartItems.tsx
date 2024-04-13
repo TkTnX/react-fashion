@@ -3,8 +3,18 @@ import s from "./s.module.scss";
 
 import leftArrow from "./img/leftArrow.svg";
 import rightArrow from "./img/rightArrow.svg";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 export const CartItems: React.FC = () => {
+  const cartItemsSelector = useSelector(
+    (state: RootState) => state.cart.cartList
+  );
+  const totalPriceSelector = useSelector(
+    (state: RootState) => state.cart.totalPrice
+  );
+
+  const totalPriceWithSale = totalPriceSelector * 0.02;
   return (
     <div className={s.items}>
       <table className={s.table}>
@@ -19,72 +29,26 @@ export const CartItems: React.FC = () => {
           </tr>
         </thead>
         <tbody className={s.tbody}>
-          <tr className={s.tbodyItem}>
-            <th>
-              <img
-                className={s.tableImg}
-                src="/images/catalog/01.jpg"
-                alt="img"
-              />
-            </th>
-            <td className={s.tableColor}>Белый</td>
-            <td className={s.tableSize}>44</td>
-            <td className={s.tablePrice}>3 999 ₽</td>
-            <td className={s.tableCounter}>
-              <button>
-                <img src={leftArrow} alt="Убрать 1 товар" />
-              </button>
-              <p>1</p>
-              <button>
-                <img src={rightArrow} alt="Добавить 1 товар" />
-              </button>
-            </td>
-            <td className={s.tablePrice}>3 999 ₽</td>
-          </tr>
-          <tr className={s.tbodyItem}>
-            <th>
-              <img
-                className={s.tableImg}
-                src="/images/catalog/01.jpg"
-                alt="img"
-              />
-            </th>
-            <td className={s.tableColor}>Белый</td>
-            <td className={s.tableSize}>44</td>
-            <td className={s.tablePrice}>3 999 ₽</td>
-            <td className={s.tableCounter}>
-              <button>
-                <img src={leftArrow} alt="Убрать 1 товар" />
-              </button>
-              <p>1</p>
-              <button>
-                <img src={rightArrow} alt="Добавить 1 товар" />
-              </button>
-            </td>
-            <td className={s.tablePrice}>3 999 ₽</td>
-          </tr>
-          <tr className={s.tbodyItem}>
-            <th>
-              <img
-                className={s.tableImg}
-                src="/images/catalog/01.jpg"
-                alt="img"
-              />
-            </th>
-            <td className={s.tableColor}>Белый</td>
-            <td className={s.tableSize}>44</td>
-            <td className={s.tablePrice}>3 999 ₽</td>
-            <td className={s.tableCounter}>
-              <button>
-                <img src={leftArrow} alt="Убрать 1 товар" />
-              </button>
-              <p>1</p>
-              <button>
-                <img src={rightArrow} alt="Добавить 1 товар" />
-              </button>
-            </td>
-            <td className={s.tablePrice}>3 999 ₽</td>
-          </tr>
+          {cartItemsSelector.map((item) => (
+            <tr key={item.id} className={s.tbodyItem}>
+              <th>
+                <img className={s.tableImg} src={item.img} alt="img" />
+              </th>
+              <td className={s.tableColor}>Белый</td>
+              <td className={s.tableSize}>44</td>
+              <td className={s.tablePrice}>{item.price}</td>
+              <td className={s.tableCounter}>
+                <button>
+                  <img src={leftArrow} alt="Убрать 1 товар" />
+                </button>
+                <p>{item.count}</p>
+                <button>
+                  <img src={rightArrow} alt="Добавить 1 товар" />
+                </button>
+              </td>
+              <td className={s.tablePrice}>{item.price * item.count} ₽</td>
+            </tr>
+          ))}
         </tbody>
       </table>
 
@@ -92,17 +56,17 @@ export const CartItems: React.FC = () => {
         <li>
           <p>Количество</p>
           <div className={s.line}></div>
-          <span>7</span>
+          <span>{cartItemsSelector.length}</span>
         </li>
         <li>
           <p>Стоимость</p>
           <div className={s.line}></div>
-          <span>10 500 ₽</span>
+          <span>{totalPriceSelector}</span>
         </li>
         <li>
           <p>Скидка</p>
           <div className={s.line}></div>
-          <span className={s.sale}>200 ₽</span>
+          <span className={s.sale}>{totalPriceWithSale} ₽</span>
         </li>
         <li>
           <p>Доставка</p>
@@ -112,7 +76,9 @@ export const CartItems: React.FC = () => {
         <li>
           <b>ИТОГО</b>
           <div className={s.line}></div>
-          <b className={s.totalPrice}>27 500 ₽</b>
+          <b className={s.totalPrice}>
+            {totalPriceSelector - totalPriceWithSale} ₽
+          </b>
         </li>
       </ul>
     </div>
