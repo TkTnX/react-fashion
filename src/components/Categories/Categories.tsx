@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import s from "./s.module.scss";
 import "./_style.scss";
 import { useFetchData } from "../../hooks/useFetchData";
+import CategoriesSkeleton from "../CategoriesSkeleton/CategoriesSkeleton";
 
 type CategoryType = {
   title: string;
@@ -15,7 +16,7 @@ type CategoryType = {
 
 export const Categories: React.FC = () => {
   const url = "https://35264782283560cf.mokky.dev/categories";
-  const { data, isLoading, error } = useFetchData(url);
+  const { data, isLoading, error } = useFetchData(url, "GET");
 
   if (isLoading) {
     return <p>Загрузка....</p>;
@@ -61,12 +62,19 @@ export const Categories: React.FC = () => {
                 },
               }}
             >
-              {data.map((category: CategoryType) => (
-                <SwiperSlide key={category.id} className={s.slide}>
-                  <img src={category.img} alt={category.title} />
-                  <h6 className={s.itemTitle}>{category.title}</h6>
-                </SwiperSlide>
-              ))}
+              {isLoading
+                ? [...new Array(5)].map((_, index) => (
+                    <SwiperSlide key={index} className={s.slide}>
+                      <CategoriesSkeleton />
+                    </SwiperSlide>
+                  ))
+                : data.map((category: CategoryType) => (
+                    <SwiperSlide key={category.id} className={s.slide}>
+                      <img src={category.img} alt={category.title} />
+                      <h6 className={s.itemTitle}>{category.title}</h6>
+                    </SwiperSlide>
+                  ))}
+              {}
             </Swiper>
           </div>
         </div>

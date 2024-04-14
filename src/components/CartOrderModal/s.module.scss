@@ -1,0 +1,79 @@
+@import "./../../scss/base/mixins";
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: clamp(1.875rem, 1.466rem + 2.05vw, 3rem);
+  text-align: center;
+
+  @include laptop {
+    width: 90%;
+  }
+}
+
+.title {
+  font-weight: 600;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+}
+
+.desc {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--light-color);
+  margin-bottom: 20px;
+}
+
+.btn {
+  border-radius: 50px;
+  background-color: var(--light-color);
+  color: #fff;
+
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 13px clamp(3.125rem, 1.989rem + 5.68vw, 6.25rem);
+  margin-bottom: 20px;
+
+  @include laptop {
+    font-size: 12px;
+    width: 100%;
+    padding: 13px 20px;
+  }
+}
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 30px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  color: var(--light-color);
+  text-align: left;
+}
+
+.payments {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+
+  @include laptop {
+    gap: 10px;
+  }
+}

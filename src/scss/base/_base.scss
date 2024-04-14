@@ -50,7 +50,7 @@ a {
 }
 
 .backdrop {
-  position: absolute;
+  position: fixed;
   z-index: 15;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.2);

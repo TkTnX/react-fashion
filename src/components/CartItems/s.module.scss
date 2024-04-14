@@ -1,4 +1,5 @@
 @import "./../../scss/base/mixins";
+
 .table {
   @include smallTablet {
     display: flex;
@@ -24,6 +25,14 @@
       display: none;
     }
   }
+}
+
+.cartEmpty {
+  margin: 20px 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 2;
 }
 
 .theadTitles {
@@ -192,4 +201,24 @@
 
 .totalPrice {
   font-size: 30px !important;
+}
+
+.order {
+  margin-top: 50px;
+  float: right;
+  border-radius: 50px;
+  padding: 18px 40px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: var(--light-color);
+  transition: all 0.1s ease-in;
+
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
 }

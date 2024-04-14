@@ -8,6 +8,7 @@ export type productType = {
   brand: string;
   sizes: string[];
   count: number;
+  color: string;
 };
 
 type cartSliceType = {
@@ -18,6 +19,12 @@ type cartSliceType = {
 const initialState: cartSliceType = {
   cartList: [],
   totalPrice: 0,
+};
+
+const calculateTotalPrice = (item: productType[]) => {
+  return item.reduce((sum: number, item) => {
+    return sum + item.price * item.count;
+  }, 0);
 };
 
 const cartSlice = createSlice({
@@ -34,9 +41,7 @@ const cartSlice = createSlice({
       } else {
         state.cartList.push({ ...action.payload, count: 1 });
       }
-      state.totalPrice = state.cartList.reduce((sum, item) => {
-        return sum + item.price * item.count;
-      }, 0);
+      state.totalPrice = calculateTotalPrice(state.cartList);
     },
     minusItem: (state, action) => {
       const findItem = state.cartList.find(
@@ -47,12 +52,13 @@ const cartSlice = createSlice({
         findItem.count--;
       }
 
-      state.totalPrice = state.cartList.reduce((sum, item) => {
-        return item.price * item.count - sum;
-      }, 0);
+      state.totalPrice = calculateTotalPrice(state.cartList);
     },
     deleteItem: (state, action) => {
-      state.cartList = state.cartList.filter((obj) => obj.id !== action.payload);
+      state.cartList = state.cartList.filter(
+        (obj) => obj.id !== action.payload
+      );
+      state.totalPrice = calculateTotalPrice(state.cartList);
     },
   },
 });

@@ -13,6 +13,7 @@ type ProductType = {
   img: string;
   desc: string;
   price: number;
+  color: string;
   sizes?: string[];
 };
 
@@ -20,10 +21,10 @@ export const FullProduct: React.FC = () => {
   const { id } = useParams();
   const url = `https://35264782283560cf.mokky.dev/catalogItems/${id}`;
 
-  const { data, isLoading, error } = useFetchData(url);
+  const { data, isLoading, error } = useFetchData(url, "GET");
   const { isAuth } = useAuth();
   const productData = data as unknown as ProductType;
-  const { img, desc, price, sizes } = productData;
+  const { img, desc, price, sizes, color } = productData;
   const dispatch = useDispatch();
   if (isLoading) {
     return <p>Загрузка...</p>;
@@ -60,6 +61,7 @@ export const FullProduct: React.FC = () => {
             <li className={s.promoSale}>Sale - 20%</li>
             <li className={s.promoNew}>New</li>
           </ul>
+          <p className={s.color}>{color}</p>
           <div className={s.price}>
             <p>цена</p> <span>{price}</span>
           </div>

@@ -15,9 +15,6 @@ function App() {
       <Sale />
       <Header />
       <main>
-        {
-          // TODO: Сделать функционал для корзины!
-        }
 
         <Routes>
           <Route path="/" element={<HomePage />} />

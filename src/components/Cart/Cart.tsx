@@ -8,6 +8,7 @@ export const Cart: React.FC = () => {
     <div className={s.wrapper}>
       <CartInfo />
       <CartItems />
+      
     </div>
   );
 };

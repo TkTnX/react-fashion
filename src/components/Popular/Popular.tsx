@@ -4,6 +4,7 @@ import { Pagination } from "swiper/modules";
 import s from "./s.module.scss";
 import { CatalogCard } from "../CatalogCard/CatalogCard";
 import { useFetchData } from "../../hooks/useFetchData";
+import CatalogSkeleton from "../CatalogSkeleton/CatalogSkeleton";
 export type CatalogCardType = {
   id: number;
   price: number;
@@ -11,17 +12,14 @@ export type CatalogCardType = {
   brand: string;
   desc: string;
   sizes?: string[];
+  color: string;
   isLoading?: boolean;
 };
 
 export const Popular: React.FC = () => {
   const url = "https://35264782283560cf.mokky.dev/catalog";
 
-  const { data, isLoading, error } = useFetchData(url);
-
-  if (isLoading) {
-    return <p>Загрузка...</p>;
-  }
+  const { data, isLoading, error } = useFetchData(url, "GET");
 
   if (error) {
     return <p>Ошибка!</p>;
@@ -56,11 +54,17 @@ export const Popular: React.FC = () => {
             },
           }}
         >
-          {data.map((card: CatalogCardType) => (
-            <SwiperSlide key={card.id}>
-              <CatalogCard {...card} />
-            </SwiperSlide>
-          ))}
+          {isLoading
+            ? [...new Array(5)].map((_, index) => (
+                <SwiperSlide key={index}>
+                  <CatalogSkeleton />
+                </SwiperSlide>
+              ))
+            : data.map((card: CatalogCardType) => (
+                <SwiperSlide key={card.id}>
+                  <CatalogCard {...card} />
+                </SwiperSlide>
+              ))}
         </Swiper>
       </div>
     </section>

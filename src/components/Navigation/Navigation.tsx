@@ -7,27 +7,34 @@ const navList = ["НОВИНКИ", "ОДЕЖДА", "ОБУВЬ", "АКСЕССУ
 export const Navigation: React.FC = () => {
   const [isHover, setIsHover] = useState<boolean>(false);
   const [activeNav, setActiveNav] = useState<number>(0);
-  const handleMouseOver = (index: number) => {
+  const handleMouseEnter = (index: number) => {
     setIsHover(true);
     setActiveNav(index);
+  };
+
+  const handleMouseOut = () => {
+    setIsHover(false);
   };
 
   return (
     <nav className={s.nav}>
       <ul className={s.list}>
         {navList.map((item, index) => (
-          <li
-            onMouseOver={() => handleMouseOver(index)}
-            key={index}
-            className={s.item}
+          <div
+            onMouseOver={() => handleMouseEnter(index)}
+            className={s.wrapper}
           >
-            <a href="#!">{item}</a>
-          </li>
+            <li key={index} className={s.item}>
+              <a href="#!">{item}</a>
+            </li>
+            <div onMouseOut={handleMouseOut}>
+              {isHover && (
+                <NavInfo setIsHover={setIsHover} title={navList[activeNav]} />
+              )}
+            </div>
+          </div>
         ))}
       </ul>
-      {isHover && (
-        <NavInfo setIsHover={setIsHover} title={navList[activeNav]} />
-      )}
     </nav>
   );
 };

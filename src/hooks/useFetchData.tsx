@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 
-
-
-export const useFetchData = (url: string) => {
+export const useFetchData = (url: string, method: string) => {
   const [fetchedData, setFetchedData] = useState({
     data: [],
     isLoading: true,
@@ -11,8 +9,19 @@ export const useFetchData = (url: string) => {
   });
 
   const fetchData = useCallback(async () => {
+    let res;
     try {
-      const res = await axios.get(url);
+      switch (method) {
+        case "GET":
+          res = await axios.get(url);
+          break;
+        case "POST":
+          res = await axios.post(url)
+          break
+        default:
+          res = await axios.get(url);
+          break;
+      }
       const data = res.data;
 
       if (data) {
