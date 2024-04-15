@@ -7,14 +7,30 @@ import { CatalogPage } from "./pages/CatalogPage";
 import { FullProductPage } from "./pages/FullProductPage";
 import { CartPage } from "./pages/CartPage";
 import { ScrollToTop } from "./helpers/ScrollToTop";
+import { useEffect, useState } from "react";
+import { Loader } from "./components/Loader/Loader";
 
 function App() {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+
+    window.addEventListener("load", () => {
+      setLoading(false);
+    });
+  }, []);
+
   return (
     <>
+      {loading && <Loader loading={loading} />}
       <ScrollToTop />
       <Sale />
       <Header />
       <main>
+        {
+          // TODO: Если получится, сделать "Админ-панель"
+        }
 
         <Routes>
           <Route path="/" element={<HomePage />} />

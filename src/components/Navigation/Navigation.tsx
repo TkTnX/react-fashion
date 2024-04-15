@@ -21,6 +21,7 @@ export const Navigation: React.FC = () => {
       <ul className={s.list}>
         {navList.map((item, index) => (
           <div
+            key={index}
             onMouseOver={() => handleMouseEnter(index)}
             className={s.wrapper}
           >

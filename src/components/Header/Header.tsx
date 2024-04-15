@@ -22,15 +22,17 @@ import {
   openAccountSelector,
   loginFormSelector,
 } from "../../redux/Slices/formsSlice";
+import { AddNewProductForm } from "../AddNewProductForm/AddNewProductForm";
 
 export const Header: React.FC = () => {
   const [openBurger, setOpenBurger] = useState<boolean>(false);
+  const [openAdminPanel, setOpenAdminPanel] = useState(false);
   const dispatch = useDispatch();
   const isOpenRegisterForm = useSelector(registerFormSelector);
   const isOpenAccount = useSelector(openAccountSelector);
   const isOpenLoginForm = useSelector(loginFormSelector);
 
-  const { isAuth } = useAuth();
+  const { isAuth, email } = useAuth();
   const handleRegisterForm = () => {
     if (!isAuth) {
       dispatch(openRegisterForm(!isOpenRegisterForm));
@@ -43,6 +45,8 @@ export const Header: React.FC = () => {
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "visible");
   }
+
+  const handleOpenAdmin = () => setOpenAdminPanel(!openAdminPanel);
 
   return (
     <>
@@ -64,6 +68,12 @@ export const Header: React.FC = () => {
               <Link to="/">
                 <h4 className={s.logo}>Logo</h4>
               </Link>
+              {email === "admin@gmail.com" && (
+                <button onClick={handleOpenAdmin} className={s.adminBtn}>
+                  Открыть Админ-панель
+                </button>
+              )}
+              {openAdminPanel && <AddNewProductForm />}
               <button className={s.location}>
                 <img src={locationImg} alt="Location" />
                 <p className={s.city}>МОСКВА</p>

@@ -6,7 +6,12 @@
 Production
 ## [Production site](https://timur-react-fashion.vercel.app)
 
+## Данные от админки
 
+Почта: admin@gmail.com
+Пароль: admin123 
+
+Моя первая попытка сделать регистрацию и "админ-панель"
 
 
 # React + TypeScript + Vite
