@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { MdOutlineClear } from "react-icons/md";
 import s from "./s.module.scss";
 import axios from "axios";
