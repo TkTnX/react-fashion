@@ -9,6 +9,7 @@ import { CartPage } from "./pages/CartPage";
 import { ScrollToTop } from "./helpers/ScrollToTop";
 import { useEffect, useState } from "react";
 import { Loader } from "./components/Loader/Loader";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -29,14 +30,16 @@ function App() {
       <Header />
       <main>
         {
-          // TODO: Если получится, сделать "Админ-панель"
+          // TODO: Сделать, чтобы был путь к странице)
+          // todo: Фильрация в каталоге
         }
 
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />
-          <Route path={"/catalog/:id"} element={<FullProductPage />} />
+          <Route path="/catalog/:id" element={<FullProductPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />

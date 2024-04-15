@@ -1,0 +1,30 @@
+.notFound {
+  display: grid;
+  gap: 25px;
+  max-width: 500px;
+  margin: 50px auto;
+  text-align: center;
+
+  h1 {
+    font-size: 80px;
+    font-weight: 900;
+  }
+  p {
+    font-size: 36px;
+    font-weight: 700;
+  }
+}
+
+.link {
+  text-align: center;
+  background-color: var(--light-color);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 50px;
+  transition: all 0.1s ease-in;
+  margin: 20px 10px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
