@@ -29,11 +29,6 @@ function App() {
       <Sale />
       <Header />
       <main>
-        {
-          // TODO: Сделать, чтобы был путь к странице)
-          // todo: Фильрация в каталоге
-        }
-
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<CatalogPage />} />

@@ -3,18 +3,33 @@ import s from "./s.module.scss";
 
 import { CatalogList } from "../CatalogList/CatalogList";
 
-const filterList = [
-  "Только с размерами",
-  "Только без размеров",
-  "Stone Island",
+const filterList = ["Менее 3000 рублей", "Более 3000 рублей"];
+import { useSearchParams } from "react-router-dom";
+
+const sortList = [
+  { title: "По цене ↑", value: "price" },
+  { title: "По цене ↓", value: "-price" },
+  { title: "По алфавиту ↑", value: "desc" },
+  { title: "По алфавиту ↓", value: "-desc" },
+  { title: "По бренду ↑", value: "brand" },
+  { title: "По бренду ↓", value: "-brand" },
 ];
 
-const sortList = ["По цене", "По бренду", "По описанию"];
+type CatalogType = {
+  currentPage: number;
+  setTotalPages: (num: number) => void;
+};
 
-export const Catalog: React.FC = () => {
+export const Catalog: React.FC<CatalogType> = ({
+  currentPage,
+  setTotalPages,
+}) => {
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const [isOpenSort, setIsOpenSort] = useState(false);
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [sortQueryValue, setSortQueryValue] = useState("brand");
+  const filterQuery = searchParams.get("filter") || "";
+  const sortQuery = searchParams.get("sort") || "";
   const handleOpenFilter = () => {
     setIsOpenFilter(!isOpenFilter);
     setIsOpenSort(false);
@@ -22,6 +37,16 @@ export const Catalog: React.FC = () => {
 
   const handleOpenSort = () => {
     setIsOpenSort(!isOpenSort);
+    setIsOpenFilter(false);
+  };
+
+  const handleChangeSort = (index: number) => {
+    const filterQuery = filterList[index];
+    const sortQuery = sortList[index];
+    setSortQueryValue(sortQuery.value);
+    setSearchParams({ sort: sortQuery.title, filter: filterQuery });
+
+    setIsOpenSort(false);
     setIsOpenFilter(false);
   };
 
@@ -37,14 +62,14 @@ export const Catalog: React.FC = () => {
           <div className={s.filters}>
             <div className={s.filter}>
               <button onClick={handleOpenFilter} className={s.filterBtn}>
-                ФИЛЬТРЫ
+                {filterQuery !== "" ? filterQuery : "Фильтры"}
               </button>
 
               {isOpenFilter && (
                 <div className={s.popup}>
                   <ul>
                     {filterList.map((item, i) => (
-                      <li key={i}>
+                      <li onClick={() => handleChangeSort(i)} key={i}>
                         <button>{item}</button>
                       </li>
                     ))}
@@ -54,15 +79,18 @@ export const Catalog: React.FC = () => {
             </div>
             <div className={s.sort}>
               <button onClick={handleOpenSort} className={s.sortBtn}>
-                СОРТИРОВКА
+                {sortQuery !== "" ? sortQuery : "Сортировка"}
               </button>
 
               {isOpenSort && (
                 <div className={s.popup}>
                   <ul>
-                    {sortList.map((item) => (
-                      <li key={item}>
-                        <button>{item}</button>
+                    {sortList.map((item, index) => (
+                      <li
+                        onClick={() => handleChangeSort(index)}
+                        key={item.value}
+                      >
+                        <button>{item.title}</button>
                       </li>
                     ))}
                   </ul>
@@ -72,7 +100,12 @@ export const Catalog: React.FC = () => {
           </div>
         </div>
         <ul className={s.catalogList}>
-          <CatalogList />
+          <CatalogList
+            setTotalPages={setTotalPages}
+            currentPage={currentPage}
+            sortQueryValue={sortQueryValue}
+            filterQuery={filterQuery}
+          />
         </ul>
       </div>
     </section>

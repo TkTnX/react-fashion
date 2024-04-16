@@ -1,20 +1,25 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
-
+import "./style.scss";
 type PaginationType = {
+  setCurrentPage: (event: any) => void;
   totalPages: number;
-  setCurrentPage: (page: number) => void
 };
 
-export const Pagination: React.FC<PaginationType> = ({ totalPages }) => {
+export const Pagination: React.FC<PaginationType> = ({
+  setCurrentPage,
+  totalPages,
+}) => {
   return (
     <>
       <ReactPaginate
+        className="pagination"
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel=">"
         pageCount={totalPages}
         pageRangeDisplayed={5}
-        previousLabel="< previous"
+        onPageChange={(event) => setCurrentPage(event.selected + 1)}
+        previousLabel="<"
         renderOnZeroPageCount={null}
       />
     </>

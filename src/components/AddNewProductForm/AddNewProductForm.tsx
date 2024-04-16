@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const AddNewProductForm: React.FC = () => {
   const [post, setPost] = useState({
-    title: "",
+    desc: "",
     img: "",
     price: "",
     brand: "",
@@ -16,7 +16,6 @@ export const AddNewProductForm: React.FC = () => {
   };
 
   const url = "https://35264782283560cf.mokky.dev/catalogItems";
-
   function handleSubmit(event: any) {
     event.preventDefault();
     axios
@@ -37,7 +36,7 @@ export const AddNewProductForm: React.FC = () => {
             Название товара
             <input
               onChange={handleInput}
-              name="title"
+              name="desc"
               placeholder="Название"
               type="text"
             />
